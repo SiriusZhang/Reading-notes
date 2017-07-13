@@ -1,11 +1,16 @@
-angular.module("sportsStore").controller("sportsStoreCtrl", function ($scope) {
+angular.module("sportsStore")
+.constant("dataUrl", "http://localhost:8080/angular/Products")
+.controller("sportsStoreCtrl", function ($scope, $http, dataUrl) {
     
-    $scope.data = {
-        products: [
-            {name: "product #1", description: "A product", category: "Category #1", price: 100},
-            {name: "product #2", description: "A product", category: "Category #2", price: 110},
-            {name: "product #3", description: "A product", category: "Category #3", price: 200},
-            {name: "product #4", description: "A product", category: "Category #4", price: 202}
-        ]
-    };
+    $scope.data = {};
+
+    $http.get(dataUrl)
+    .success(function(data) {
+        $scope.data = data;
+    })
+    .error(function(error){
+        $scope.data.error = error;
+        console.log(error);
+    })
+        
 });

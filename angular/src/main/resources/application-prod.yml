@@ -51,14 +51,6 @@ ftp:
     password: qkljf123
     path: ./data/certification
 
-#TCOS
-tcos:
-    appId: 1253336138
-    secretId: AKIDrb9VgfT2RefU7ZrvpZ7WmphNrrJEBf1D
-    secretKey: 84pOlvzwzY0QhmNmzzpUyHOrDNLhxJUU
-    bucketName: piaolink
-    region: gz
-    path: /op_admin_prod/
 
 # LOGGING  
 logging:  

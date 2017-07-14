@@ -44,23 +44,6 @@ mybatis:
     mapperLocations: classpath*:mybatis/sqlmap/*Mapper*.xml
     configLocation: classpath:mybatis/mybatis-config.xml
 
-#Ftp
-ftp:
-    hostname: 172.17.0.2
-    port: 21
-    username: ftpuser
-    password: ftpuser
-    path: ./data/certification
-
-#TCOS
-tcos:
-    appId: 1253336138
-    secretId: AKIDrb9VgfT2RefU7ZrvpZ7WmphNrrJEBf1D
-    secretKey: 84pOlvzwzY0QhmNmzzpUyHOrDNLhxJUU
-    bucketName: piaolink
-    region: gz
-    path: /op_admin_test/
-
 # LOGGING  
 logging:  
     level:

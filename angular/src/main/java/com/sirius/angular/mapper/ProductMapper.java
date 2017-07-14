@@ -52,4 +52,6 @@ public interface ProductMapper {
      * @mbggenerated Wed Jul 12 17:58:14 CST 2017
      */
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectByIds(List ids);
 }

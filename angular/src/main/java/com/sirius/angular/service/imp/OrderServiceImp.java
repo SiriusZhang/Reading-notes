@@ -59,6 +59,7 @@ public class OrderServiceImp implements OrderService{
             ids += ",";
         }
         record.setProducts(ids);
-        return orderMapper.insertSelective(record);
+        orderMapper.insertSelective(record);
+        return record.getId();
     }
 }

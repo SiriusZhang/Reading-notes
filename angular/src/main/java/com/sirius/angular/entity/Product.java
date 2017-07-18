@@ -180,4 +180,11 @@ public class Product {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public void setProduct(com.sirius.angular.dto.Product product) {
+        this.setName(product.getName());
+        this.setCategory(product.getCategory());
+        this.setDescription(product.getDescription());
+        this.setPrice(product.getPrice());
+    }
 }

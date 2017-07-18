@@ -17,16 +17,13 @@ angular.module("sportsStore")
     $scope.sendOrder = function(shippingDetails) {
         var order = angular.copy(shippingDetails);
         order.products = cart.getProducts();
-        console.log(JSON.stringify(order));
 
         $http.post(orderUrl, order)
         .success(function (data){
-            console.log(data);
             $scope.data.orderId = data;
             cart.getProducts().length = 0;
         })
         .error(function (error) {
-            console.log(data);
             $scope.data.orderError = error;
         })
         .finally(function(){

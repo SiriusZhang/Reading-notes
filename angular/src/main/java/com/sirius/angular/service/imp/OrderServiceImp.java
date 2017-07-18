@@ -27,6 +27,7 @@ public class OrderServiceImp implements OrderService{
 
         for (com.sirius.angular.entity.Order o:orders) {
             Order order = new Order();
+            order.setOrder(o);
             String products = o.getProducts();
             if (products != null && !products.isEmpty()) {
                 String[] ids = products.split(",");

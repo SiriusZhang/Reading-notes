@@ -19,4 +19,13 @@ public class ProductServiceImp implements ProductService {
     public List<Product> getProducts() {
         return productMapper.selectByPrimaryKey(null);
     }
+
+    @Override
+    public Integer addProduct(com.sirius.angular.dto.Product product){
+        Product p = new Product();
+        p.setProduct(product);
+        int resutlt = productMapper.insertSelective(p);
+        if (resutlt == 1) return p.getId();
+        else return -1;
+    }
 }

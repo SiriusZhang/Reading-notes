@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>Forms</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+    <script src="angular.js"></script>
+    <script type="text/javascript">
+        angular.module("exampleApp", [])
+        .controller("defaultCtrl", function ($scope) {
+            $scope.todos = [
+                {action: "Get groceries", complete: false},
+                {action: "Call plumber", complete: false},
+                {action: "Buy running shoes", complete: true},
+                {action: "By Flowers", complete: false},
+                {action: "Call family", complete: false}
+                ];
+        });
+
+    </script>
+</head>
+<body>
+    <div id="todoPanel" class="pannel" ng-controller="defaultCtrl">
+        <h3 class="pannel-header">
+            To Do List
+            <span class="label label-info">
+                {{(todos | filter: {complete: 'false'}).length}}
+            </span>
+        </h3>
+
+        <table class="table">
+            <thead>
+                <tr><th>#</th><th>Action</th><th>Done</th></tr>
+            </thead>
+            <tr ng-repeat="item in todos">
+                <td>{{$index+1}}</td>
+                <td>{{item.action}}</td>
+                <td>{{item.complete}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

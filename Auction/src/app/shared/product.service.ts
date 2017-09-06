@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ProductService {
+
+  private dataSource: Observable<any>;
 
   private products: Product[] = [
     new Product(1, '第1个商品名称', 1.99, 3.5, '这是第一个商品', ['电子商品', '电子产品']),
@@ -33,18 +37,28 @@ export class ProductService {
     new Comment(18, 5, '2017-02-02 22:22:33', '张三', 2, '东西不错')
   ];
 
-  constructor() { }
+  constructor(private http:Http) {
+    this.dataSource = this.http.get('/products').map((res) => res.json());
+  }
 
   getProducts(): Product[] {
     return this.products;
   }
 
   getProduct(id: number): Product {
+    this.dataSource.subscribe(
+      (data) => this.products = data
+    );
+
     return this.products.find((product: Product) => product.id == id);
   }
 
   getCommentForProductId(id: number): Comment[] {
     return this.comments.filter((comment: Comment) => comment.productId == id );
+  }
+
+  getAllCategories(): string[] {
+    return ['电子产品', '日用品', '家电'];
   }
 
 }

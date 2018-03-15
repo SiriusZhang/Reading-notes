@@ -27,6 +27,7 @@ def inference(input_tensor, avg_class, weights1, biases1, weights2, biases2):
 		return tf.matmul(layer1, avg_class.average(weights2)) + avg_class.average(biases2)
 
 def train(mnist):
+	#占位符
 	x = tf.placeholder(tf.float32, [None, INPUT_NODE], name='x-input')
 	y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE], name='y-input')
 
@@ -89,6 +90,7 @@ def train(mnist):
 
 
 def main(argv=None):
+	print('run main function ...')
 	mnist = input_data.read_data_sets('data/', one_hot=True)
 	train(mnist)
 

@@ -84,7 +84,8 @@ with tf.Session() as sess:
 	# 接着遍历epoch_step次所有数据
 	for epoch in range(epoch_step):
 		xs, ys = mnist.train.next_batch(BATCH_SIZE)
-		t, output = sess.run([optimizer, cost], feed_dict={x: xs, y: ys})
+		t, output = sess.run([cost, optimizer], feed_dict={x: xs, y: ys})
+		# optimizer.run(feed_dict={x: xs, y: ys})
 
 	print("finish!")
 

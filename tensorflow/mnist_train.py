@@ -22,26 +22,29 @@ def train(mnist):
 	regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)
 	y = mnist_inference.inference(x, regularizer)
 
-	globel_step = tf.Variable(0, trainable = False)
+	global_step = tf.Variable(0, trainable = False)
 
-	variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, globel_step)
+	variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
 	variables_averages_op = variable_averages.apply(tf.trainable_variables())
+	print('variables_averages_op', variables_averages_op)
 	cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
 	cross_entropy_mean = tf.reduce_mean(cross_entropy)
 	loss = cross_entropy_mean + tf.add_n(tf.get_collection('losses'))
-	learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE, globel_step, mnist.train.num_examples / BATHC_SIZE, LEARNING_RATE_DECAY)
-	train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+	learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE, global_step, mnist.train.num_examples / BATHC_SIZE, LEARNING_RATE_DECAY)
+	print('learning_rate: ' , learning_rate)
+	train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step = global_step)
+	print('train_step', train_step)
 
 	with tf.control_dependencies([train_step, variables_averages_op]):
 		train_op = tf.no_op(name = 'train')
 
 	saver = tf.train.Saver()
 	with tf.Session() as sess:
-		tf.initialize_all_variables().run()
+		tf.global_variables_initializer().run()
 
 		for i in range(TRAINING_STEPS):
 			xs, ys = mnist.train.next_batch(BATHC_SIZE)
-			_, loss_value, step = sess.run([train_op, loss, globel_step], feed_dict = {x: xs, y_: ys})
+			_, loss_value, step = sess.run([train_op, loss, global_step], feed_dict = {x: xs, y_: ys})
 
 			if i % 1000 == 0 :
 				print('after %d training step(s), loss on training batch is %g.' % (step, loss_value))

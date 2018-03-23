@@ -6,7 +6,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 import mnist_inference
 import mnist_train
 
-EVAL_INTERVAL_SECS = 10
+EVAL_INTERVAL_SECS = 10·
 
 def evaluate(mnist):
 	with tf.Graph().as_default() as g:

@@ -64,9 +64,6 @@ import time
 import numpy as np
 import tensorflow as tf
 
-import reader
-import util
-
 from tensorflow.python.client import device_lib
 
 flags = tf.flags
